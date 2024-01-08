@@ -32,7 +32,10 @@ const app = express();
 // Modify this if you want to restrict access to the server
 app.use(
 	cors({
-		origin: '*',
+		credentials: true,
+		origin: function (origin, callback) {
+			callback(null, true);
+		}
 	})
 );
 app.use(express.static(__dirname + '/public'));

@@ -17,6 +17,8 @@ app.post('/', async (req: Request, res: Response) => {
 
 		let sessionId: string = req.body.sessionId;
 		let nickname: string = req.body.nickname;
+		let role: OpenViduRole = req.body.role || '';
+	
 		let date = null;
 		let sessionCreated: Session = await openviduService.createSession(sessionId);
 		const MODERATOR_TOKEN_NAME = openviduService.MODERATOR_TOKEN_NAME;
@@ -29,7 +31,9 @@ app.post('/', async (req: Request, res: Response) => {
 		const hasValidToken = hasModeratorValidToken || hasParticipantValidToken;
 		const iAmFirstConnection = sessionCreated.activeConnections.length === 0;
 		const isSessionCreator = hasModeratorValidToken || iAmFirstConnection;
-		const role: OpenViduRole = isSessionCreator ? OpenViduRole.MODERATOR : OpenViduRole.PUBLISHER;
+		role = role || (isSessionCreator ? OpenViduRole.MODERATOR : OpenViduRole.PUBLISHER);
+
+		console.log('role', role);
 
 		const response = {
 			cameraToken: (await openviduService.createConnection(sessionCreated, nickname, role)).token,

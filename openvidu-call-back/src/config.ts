@@ -1,3 +1,7 @@
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+
 export const SERVER_PORT = process.env.SERVER_PORT || 5000;
 export const OPENVIDU_URL = process.env.OPENVIDU_URL || 'http://localhost:4443';
 export const OPENVIDU_SECRET = process.env.OPENVIDU_SECRET || 'MY_SECRET';
