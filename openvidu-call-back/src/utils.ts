@@ -1,3 +1,5 @@
+import type { IncomingMessage } from "http";
+
 /**
  * Retry is used for OpenVidu Enterprise High Availability for reconnecting purposes
  * to allow fault tolerance
@@ -10,8 +12,8 @@ export class RetryOptions {
     private _msRetrySleep: number;
     private _multiplier: number;
 
-    constructor(retries = 1, incrementSleepOnRetry = 10,  maxRetries = 30, msRetrySleep = 150, multiplier = 1.2) {
-        if(retries < 0 || incrementSleepOnRetry < 0 || maxRetries < 0 || msRetrySleep < 0 || multiplier < 0){
+    constructor(retries = 1, incrementSleepOnRetry = 10, maxRetries = 30, msRetrySleep = 150, multiplier = 1.2) {
+        if (retries < 0 || incrementSleepOnRetry < 0 || maxRetries < 0 || msRetrySleep < 0 || multiplier < 0) {
             throw new Error("Parameters cannot be negative.");
         }
         this._retries = retries;
@@ -57,3 +59,17 @@ export class RetryOptions {
         return this._multiplier;
     }
 }
+
+export class Logger {
+    info = (...args: Parameters<typeof console.log>) => {
+        console.info(...args);
+    }
+    warn = (...args: Parameters<typeof console.log>) => {
+        console.warn(...args);
+    }
+    error = (...args: Parameters<typeof console.log>) => {
+        console.error(...args);
+    }
+}
+
+export const logger = new Logger();

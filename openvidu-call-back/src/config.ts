@@ -12,3 +12,6 @@ export const CALL_SECRET = process.env.CALL_SECRET || OPENVIDU_SECRET;
 export const CALL_ADMIN_SECRET = process.env.CALL_ADMIN_SECRET || OPENVIDU_SECRET;
 export const CALL_RECORDING = process.env.CALL_RECORDING || 'ENABLED';
 export const CALL_BROADCAST = process.env.CALL_BROADCAST || 'ENABLED';
+
+export const RECORDING_UPLOAD_URL = process.env.RECORDING_UPLOAD_URL || ''
+export const RECORDING_PATH = process.env.RECORDING_PATH || '/opt/openvidu/recordings'

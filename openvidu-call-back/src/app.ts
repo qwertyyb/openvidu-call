@@ -7,6 +7,7 @@ import { app as broadcastController } from './controllers/BroadcastController';
 import { app as callController } from './controllers/CallController';
 import { app as recordingController, proxyGETRecording } from './controllers/RecordingController';
 import { app as sessionController } from './controllers/SessionController';
+import { app as WebhookController } from './controllers/WebhookController';
 import { AuthService } from './services/AuthService';
 
 import * as chalk from 'chalk';
@@ -47,6 +48,7 @@ app.use('/recordings', authService.authorizer, recordingController);
 app.use('/recordings/:recordingId', proxyGETRecording);
 app.use('/broadcasts', authService.authorizer, broadcastController);
 app.use('/auth', authController);
+app.use('/webhook', WebhookController);
 
 // Accept selfsigned certificates if CALL_OPENVIDU_CERTTYPE=selfsigned
 if (CALL_OPENVIDU_CERTTYPE === 'selfsigned') {

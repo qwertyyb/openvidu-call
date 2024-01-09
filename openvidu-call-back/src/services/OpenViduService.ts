@@ -1,4 +1,4 @@
-import { Connection, ConnectionProperties, OpenVidu, OpenViduRole, Recording, Session, SessionProperties } from 'openvidu-node-client';
+import { Connection, ConnectionProperties, OpenVidu, OpenViduRole, Recording, RecordingMode, Session, SessionProperties } from 'openvidu-node-client';
 import { OPENVIDU_SECRET, OPENVIDU_URL } from '../config';
 import { RetryOptions } from '../utils';
 
@@ -105,7 +105,13 @@ export class OpenViduService {
 		while (retryOptions.canRetry()) {
 			try {
 				console.log('Creating session: ', sessionId);
-				let sessionProperties: SessionProperties = { customSessionId: sessionId };
+				let sessionProperties: SessionProperties = {
+					customSessionId: sessionId,
+					recordingMode: RecordingMode.ALWAYS, // RecordingMode.ALWAYS for automatic recording
+					defaultRecordingProperties: {
+						outputMode: Recording.OutputMode.COMPOSED
+					}
+				};
 				const session = await this.openvidu.createSession(sessionProperties);
 				await session.fetch();
 				return session;
