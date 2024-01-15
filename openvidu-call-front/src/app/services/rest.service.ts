@@ -16,10 +16,9 @@ interface SessionResponse {
 	providedIn: 'root'
 })
 export class RestService {
-	private baseHref: string;
+	private baseHref: string = '/web-call/api/v1/'
 
 	constructor(private http: HttpClient) {
-		this.baseHref = '/' + (!!window.location.pathname.split('/')[1] ? window.location.pathname.split('/')[1] + '/' : '');
 	}
 
 	async login(username: string, password: string): Promise<{ logged: boolean }> {

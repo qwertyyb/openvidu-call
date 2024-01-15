@@ -12,6 +12,7 @@ import { AuthService } from './services/AuthService';
 
 import * as chalk from 'chalk';
 import {
+	BASE_PATH,
 	CALL_ADMIN_SECRET,
 	CALL_BROADCAST,
 	CALL_OPENVIDU_CERTTYPE,
@@ -42,13 +43,14 @@ app.use(
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(cookieParser());
-app.use('/call', callController);
-app.use('/sessions', authService.authorizer, sessionController);
-app.use('/recordings', authService.authorizer, recordingController);
-app.use('/recordings/:recordingId', proxyGETRecording);
-app.use('/broadcasts', authService.authorizer, broadcastController);
-app.use('/auth', authController);
-app.use('/webhook', WebhookController);
+
+app.use(`${BASE_PATH}/call`, callController);
+app.use(`${BASE_PATH}/sessions`, authService.authorizer, sessionController);
+app.use(`${BASE_PATH}/recordings`, authService.authorizer, recordingController);
+app.use(`${BASE_PATH}/recordings/:recordingId`, proxyGETRecording);
+app.use(`${BASE_PATH}/broadcasts`, authService.authorizer, broadcastController);
+app.use(`${BASE_PATH}/auth`, authController);
+app.use(`${BASE_PATH}/webhook`, WebhookController);
 
 // Accept selfsigned certificates if CALL_OPENVIDU_CERTTYPE=selfsigned
 if (CALL_OPENVIDU_CERTTYPE === 'selfsigned') {
