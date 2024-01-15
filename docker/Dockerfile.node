@@ -22,6 +22,8 @@ WORKDIR /opt/openvidu-call
 
 COPY --from=openvidu-call-build /openvidu-call/openvidu-call-back .
 
+COPY --from=openvidu-call-build /openvidu-call/demo ./dist/public/demo
+
 RUN npm install --location=global npm
 
 # Install backend dependencies and build it for production
