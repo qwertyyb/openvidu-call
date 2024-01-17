@@ -26,3 +26,7 @@ ready-to-use component 包含 JS 和 CSS 两部分，CSS 引用了谷歌字体�
 ## 使用方法
 
 可以参考此 [demo](https://43.137.12.220/demo/), 核心逻辑可 [参考代码](https://github.com/qwertyyb/openvidu-call/blob/feature/subscriber/demo/app.js)
+
+## 注意
+
+需要注意的是，对 sessionId 有要求，要求 sessionId 的格式为 `${床号}-{任意字符}`
