@@ -3,7 +3,9 @@ const fetchToken = async (args = {}) => {
     sessionId: 'daily-call',
     ...args,
   })
-  const response = await fetch("/web-call/api/v1/sessions", {
+  // const baseURL = ""
+  const baseURL = 'https://webrtc.qwertyyb.cn'
+  const response = await fetch(baseURL + "/web-call/api/v1/sessions", {
     "body": body,
     "method": "POST",
     "headers": {

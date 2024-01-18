@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script src="./lib/openvidu-webcomponent-2.29.3.js"></script>
-  <link rel="stylesheet" href="./lib/openvidu-webcomponent-2.29.3.css">
+  <script src="./lib/openvidu-webcomponent-2.29.4.js"></script>
+  <link rel="stylesheet" href="./lib/openvidu-webcomponent-2.29.4.css">
   <style>
     openvidu-webcomponent {
       display: block;
@@ -44,7 +44,6 @@
   <input id="session" placeholder="请输入会话名" value="678-nurse1" />
   <button id="start">开始通话</button>
   <button id="watch">开始观看</button>
-  <button id="join">加入会话</button>
 
   <div id="joiner-container"></div>
   <div id="viewer-container"></div>
@@ -53,12 +52,27 @@
   <script>
     const getSessionId = () => document.getElementById('session').value;
 
-    const webCall = WebCall.createParticipant({ sessionId: getSessionId(), container: '#joiner-container' })
-    const viewer = WebCall.createViewer({ sessionId: getSessionId(), container: '#viewer-container' })
+    let participant = null;
+    let viewer = null;
 
-    document.getElementById('start').addEventListener('click', () => webCall.join())
-    document.getElementById('watch').addEventListener('click', () => viewer.watch())
-    document.getElementById('join').addEventListener('click', () => viewer.join())
+    document.getElementById('start').addEventListener('click', () => {
+      if (participant) {
+        participant.destroy();
+      }
+      participant = WebCall.createParticipant({ sessionId: getSessionId(), container: '#joiner-container' })
+      participant.join()
+    });
+    document.getElementById('watch').addEventListener('click', () => {
+      if (viewer) {
+        viewer.destroy()
+      }
+      viewer = WebCall.createViewer({ sessionId: getSessionId(), container: '#viewer-container' })
+      viewer.watch()
+    })
+    window.addEventListener('unload', () => {
+      viewer && viewer.destroy();
+      participant && participant.destroy();
+    })
   </script>
 </body>
 

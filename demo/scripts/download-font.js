@@ -3,7 +3,7 @@ const fs = require('fs')
 const { Readable } = require('stream')
 const { finished } = require('stream/promises')
 
-const CSS_FILE_PATH = path.join(__dirname, '../lib/openvidu-webcomponent-2.29.3.css')
+const CSS_FILE_PATH = path.join(__dirname, '../lib/openvidu-webcomponent-2.29.4.css')
 const distPath = path.join(__dirname, '../fonts')
 
 const parseUrl = (content) => {
