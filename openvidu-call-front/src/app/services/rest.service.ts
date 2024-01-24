@@ -16,7 +16,7 @@ interface SessionResponse {
 	providedIn: 'root'
 })
 export class RestService {
-	private baseHref: string = 'https://webrtc.qwertyyb.cn/web-call/api/v1/'
+	private baseHref: string = '/web-call/api/v1/'
 
 	constructor(private http: HttpClient) {
 	}

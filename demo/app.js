@@ -3,8 +3,8 @@ const fetchToken = async (args = {}) => {
     sessionId: 'daily-call',
     ...args,
   })
-  // const baseURL = ""
-  const baseURL = 'https://webrtc.qwertyyb.cn'
+  const baseURL = ""
+  // const baseURL = 'https://webrtc.qwertyyb.cn'
   const response = await fetch(baseURL + "/web-call/api/v1/sessions", {
     "body": body,
     "method": "POST",
@@ -159,6 +159,8 @@ class WebCallParticipant {
       ovComp = document.createElement('openvidu-webcomponent');
       ovComp.prejoin = false
       ovComp.minimal = true
+      ovComp.localStreamVisible = false
+      // ovComp.participantMode = 'PARTICIPANT'
       ovComp.lang = 'cn'
     
       this.container.appendChild(ovComp);
